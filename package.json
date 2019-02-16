@@ -1,0 +1,36 @@
+{
+  "name": "serverless-import-apigateway",
+  "version": "1.0.1",
+  "description": "Dynamically import an existing AWS API Gateway into your Serverless stack.",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikeSouza/serverless-import-apigateway.git"
+  },
+  "keywords": [
+    "serverless",
+    "serverless framework",
+    "serverless plugin",
+    "serverless plugins",
+    "amazon web services",
+    "aws",
+    "aws api gateway",
+    "api gateway",
+    "apigateway",
+    "import"
+  ],
+  "author": "Mike Souza",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MikeSouza/serverless-import-apigateway/issues"
+  },
+  "homepage": "https://github.com/MikeSouza/serverless-import-apigateway#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "chalk": "^2.4.2"
+  }
+}
