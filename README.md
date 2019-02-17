@@ -20,7 +20,8 @@ custom:
     path: /
 ```
 
-| Property | Required | Type     | Default | Description                                                |
-|----------|----------|----------|---------|------------------------------------------------------------|
-| `name`   |  `true`  | `string` |         | The name of the REST API for the AWS API Gateway to import |
-| `path`   |  `false` | `string` |   `/`   | The root resource path to import from the REST API         |
+| Property    | Required | Type     | Default | Description                                                |
+|-------------|----------|----------|---------|------------------------------------------------------------|
+| `name`      |  `true`  | `string` |         | The name of the REST API for the AWS API Gateway to import |
+| `path`      |  `false` | `string` |   `/`   | The root resource path to import from the REST API         |
+| `resources` |  `false` |  `array` |   `[]`  | The existing resource paths to import from the REST API    |
