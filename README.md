@@ -35,7 +35,7 @@ resources:
         Name: ExportedApiGatewayRestApi
 ```
 
-Now if you want to create another service and add additional endpoints to this existing API Gateway, Serverless supports (configuring)[https://serverless.com/framework/docs/providers/aws/guide/serverless.yml] the AWS provider to have a service use an existing API Gateway with something like the following:
+Now if you want to create another service and add additional endpoints to this existing API Gateway, Serverless supports [configuring](https://serverless.com/framework/docs/providers/aws/guide/serverless.yml) the AWS provider to have a service use an existing API Gateway with something like the following:
 
 ```yaml
 service: second-service
