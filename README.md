@@ -70,6 +70,10 @@ sls deploy --restApiId ${RESTAPI_ID} --restApiRootResourceId ${ROOT_RESOURCE_ID}
 
 This is hacky and less than ideal.
 
+## Install
+
+`npm install serverless-import-apigateway --save-dev`
+
 ## Configuration
 
 Add the plugin to your `serverless.yml`:
