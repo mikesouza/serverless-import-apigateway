@@ -8,7 +8,7 @@ This plugin allows you to specify the name and paths of your existing API Gatewa
 
 By default, [Serverless](https://https://serverless.com) creates automatically an API Gateway for each Serverless stack or service (i.e. `serverless.yml`) you deploy. This is sufficient if you only have a single service and monolithic `serverless.yml` or can deploy your entire Serverless app at once, but if you wish to break up your monolithic Serverless app into multiple `serverless.yml` services and deploy each stack independently but share the same API Gateway stage/ REST API, then you want each service to use the same API Gateway.
 
-Suppose you have the following existing Serverless service and it has an API Gateway created for an Lambda performing a status check on the root path:
+Suppose you have the following Serverless service with an API Gateway created for a root endpoint `/`:
 
 ```yaml
 service: first-service
@@ -35,7 +35,7 @@ resources:
         Name: ExportedApiGatewayRestApi
 ```
 
-Now if you want to create another service and add additional endpoints to this existing API Gateway, Serverless supports [configuring](https://serverless.com/framework/docs/providers/aws/guide/serverless.yml) the AWS provider to have a service use an existing API Gateway with something like the following:
+Now if you want to create another service and add additional endpoints to this existing API Gateway, Serverless supports [configuring](https://serverless.com/framework/docs/providers/aws/guide/serverless.yml) the AWS provider to have use an existing API Gateway with something like the following:
 
 ```yaml
 service: second-service
@@ -48,11 +48,11 @@ provider:
     restApiRootResourceId: 9df5ik7fyy # Root resource ID, represent as / path
 ```
 
-The `restApiId` and `restApiRootResourceId` can be obtained via the AWS CLI with the `aws apigateway get-rest-apis` and `aws apigateway get-resources` commands, respectively.
+However, it's not ideal to hardcode the `restApiId` and `restApiRootResourceId` into your `serverless.yml`, which can be obtained via the AWS CLI with the [get-rest-apis](https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-rest-apis.html) and [get-resources](https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-resources.html) commands, respectively.
 
-However, it's not ideal to hardcode these IDs into your `serverless.yml` and unfortunately you cannot import the first service's exported CloudFormation stack output variable `ExportedApiGatewayRestApi` from within the provider's configuration using something like `'Fn::ImportValue': ExportedApiGatewayRestApi`. This will produce an error.
+Unfortunately you cannot import the first service's exported CloudFormation stack output variable `ExportedApiGatewayRestApi` from within the provider's configuration using something like `restApiId: { 'Fn::ImportValue': ExportedApiGatewayRestApi }`. This will produce an error.
 
-The next best thing is to populate environment variables or pass in options from the CLI using a shell script which queries these IDs from the AWS CLI using the REST API's name so that you can reference them from the provider's configuration with `${opt:restApiId}` or `${env:restApiId}`. The script might look something like this:
+The next best thing is to write a shell script that queries these IDs with the AWS CLI by filtering on the REST API's name and paths, and populating environment variables or passing in parameters to the Serverless CLI, so that you can reference them from the provider's configuration with `${opt:restApiId}` or `${env:restApiId}`. The script might look something like this:
 
 ```bash
 #!/usr/bin/env bash
@@ -68,7 +68,9 @@ ROOT_RESOURCE_ID=$(aws apigateway get-resources --region ${REGION} --rest-api-id
 sls deploy --restApiId ${RESTAPI_ID} --restApiRootResourceId ${ROOT_RESOURCE_ID}
 ```
 
-This is hacky and less than ideal.
+This is still a hacky and less than ideal solution.
+
+Enter this plugin- you can accomplish all of this and more *without* a shell script gluing things together!
 
 ## Install
 
