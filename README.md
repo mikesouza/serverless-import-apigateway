@@ -1,5 +1,8 @@
 # serverless-import-apigateway
 
+[![Build Status](https://travis-ci.org/MikeSouza/serverless-import-apigateway.svg?branch=master)](https://travis-ci.org/MikeSouza/serverless-import-apigateway)
+[![Coverage Status](https://coveralls.io/repos/github/MikeSouza/serverless-import-apigateway/badge.svg?branch=master)](https://coveralls.io/github/MikeSouza/serverless-import-apigateway?branch=master)
+
 Dynamically import an existing AWS API Gateway into your Serverless stack.
 
 ## Purpose
