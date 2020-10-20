@@ -7,6 +7,10 @@ Dynamically import an existing AWS API Gateway into your Serverless stack.
 
 ## Purpose
 
+**This plugin should no longer be used and is no longer necessary. See [Serverless](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/#easiest-and-cicd-friendly-example-of-using-shared-api-gateway-and-api-resources) for an example of sharing a single API Gateway between multiple stacks.**
+
+---
+
 This plugin allows you to specify the name and paths of your existing API Gateway's REST API and it will lookup and configure the provider's API Gateway with the necessary IDs.
 
 By default, [Serverless](https://https://serverless.com) creates automatically an API Gateway for each Serverless stack or service (i.e. `serverless.yml`) you deploy. This is sufficient if you only have a single service and monolithic `serverless.yml` or can deploy your entire Serverless app at once, but if you wish to break up your monolithic Serverless app into multiple `serverless.yml` services and deploy each stack independently but share the same API Gateway stage/ REST API, then you want each service to use the same API Gateway.
